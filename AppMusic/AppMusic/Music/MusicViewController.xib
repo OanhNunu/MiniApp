@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MusicViewController" customModule="AppMusic" customModuleProvider="target">
+            <connections>
+                <outlet property="nameSearchBar" destination="Zhk-4V-uWb" id="Jfi-km-Z3K"/>
+                <outlet property="tableView" destination="Sep-9b-Bu2" id="3yD-tV-jSI"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" placeholder="Tìm tên bài hát hoặc tên ca sĩ" translatesAutoresizingMaskIntoConstraints="NO" id="Zhk-4V-uWb">
+                    <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="n7T-am-MhX"/>
+                    </constraints>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="BYb-Gb-KU3">
+                    <rect key="frame" x="0.0" y="88" width="414" height="44"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Udp-2j-7YL">
+                            <rect key="frame" x="0.0" y="0.0" width="255" height="44"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nghe ngẫu nhiên" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jO4-7G-7dO">
+                                    <rect key="frame" x="0.0" y="0.0" width="183" height="44"/>
+                                    <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="18"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Xd-fk-D0k">
+                                    <rect key="frame" x="183" y="0.0" width="72" height="44"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain">
+                                        <imageReference key="image" image="shuffle" catalog="system" symbolScale="large" renderingMode="original"/>
+                                    </buttonConfiguration>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Oi9-gb-lq9">
+                            <rect key="frame" x="255" y="0.0" width="159" height="44"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sắp xếp" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMV-Hf-aXy">
+                                    <rect key="frame" x="0.0" y="0.0" width="85.5" height="44"/>
+                                    <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="18"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nDf-NU-Oke">
+                                    <rect key="frame" x="85.5" y="0.0" width="73.5" height="44"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain">
+                                        <imageReference key="image" image="arrow.up.arrow.down" catalog="system" symbolScale="large" renderingMode="original"/>
+                                    </buttonConfiguration>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="kxK-Ws-bar"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="orP-0q-GWE"/>
+                    </constraints>
+                </stackView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Sep-9b-Bu2">
+                    <rect key="frame" x="0.0" y="132" width="414" height="730"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                </tableView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="Zhk-4V-uWb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="1Lj-e2-Ct1"/>
+                <constraint firstItem="Sep-9b-Bu2" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="8d1-tY-IHk"/>
+                <constraint firstItem="Sep-9b-Bu2" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="D64-bP-Neh"/>
+                <constraint firstItem="BYb-Gb-KU3" firstAttribute="top" secondItem="Zhk-4V-uWb" secondAttribute="bottom" id="IPI-zw-L8b"/>
+                <constraint firstItem="Sep-9b-Bu2" firstAttribute="top" secondItem="BYb-Gb-KU3" secondAttribute="bottom" id="R1q-LB-ubr"/>
+                <constraint firstItem="Zhk-4V-uWb" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="djA-s2-pqd"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="BYb-Gb-KU3" secondAttribute="trailing" id="fJQ-BZ-YJR"/>
+                <constraint firstItem="Sep-9b-Bu2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="iF1-jz-a0F"/>
+                <constraint firstItem="Zhk-4V-uWb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="q96-ed-Ppv"/>
+                <constraint firstItem="BYb-Gb-KU3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="r5R-j3-WOi"/>
+            </constraints>
+            <point key="canvasLocation" x="118.84057971014494" y="-14.0625"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="arrow.up.arrow.down" catalog="system" width="128" height="98"/>
+        <image name="shuffle" catalog="system" width="128" height="95"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
