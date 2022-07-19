@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BaseCollectionView" customModule="AppMusic" customModuleProvider="target">
+            <connections>
+                <outlet property="albumSearchBar" destination="FFd-pZ-rcb" id="U6f-Uk-CD8"/>
+                <outlet property="collectionView" destination="aCr-73-na2" id="gSB-se-hkY"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="FFd-pZ-rcb">
+                    <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="awl-1s-bVR"/>
+                    </constraints>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="aCr-73-na2">
+                    <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ng7-9E-sdI">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="FFd-pZ-rcb" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="BNx-Kj-qoG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="aCr-73-na2" secondAttribute="bottom" id="RjU-O9-sN4"/>
+                <constraint firstItem="aCr-73-na2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="fel-7i-06d"/>
+                <constraint firstItem="aCr-73-na2" firstAttribute="top" secondItem="FFd-pZ-rcb" secondAttribute="bottom" id="kOA-De-uCd"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aCr-73-na2" secondAttribute="trailing" id="o8k-Ok-XSq"/>
+                <constraint firstItem="FFd-pZ-rcb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wiK-7r-8Cp"/>
+                <constraint firstItem="FFd-pZ-rcb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="x4z-NF-QaF"/>
+            </constraints>
+            <point key="canvasLocation" x="164" y="-154"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
