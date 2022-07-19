@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="AppMusic" customModuleProvider="target">
+            <connections>
+                <outlet property="passwordTextField" destination="AMV-q9-doM" id="n9S-3q-bMf"/>
+                <outlet property="phoneNumberTextField" destination="cpE-EW-9Np" id="MtR-qP-Ujx"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nen" translatesAutoresizingMaskIntoConstraints="NO" id="QVr-Ty-rBR">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                </imageView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xLB-ow-AXA">
+                    <rect key="frame" x="30" y="367" width="354" height="162"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nhập số điện thoại" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cpE-EW-9Np">
+                            <rect key="frame" x="0.0" y="0.0" width="354" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="ZXO-R0-Q5h"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nhập mật khẩu" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AMV-q9-doM">
+                            <rect key="frame" x="0.0" y="54" width="354" height="44"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSr-9X-7zR">
+                            <rect key="frame" x="0.0" y="108" width="354" height="54"/>
+                            <color key="backgroundColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain">
+                                <attributedString key="attributedTitle">
+                                    <fragment content="Đăng nhập">
+                                        <attributes>
+                                            <font key="NSFont" size="21" name="TimesNewRomanPS-BoldMT"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="touchLoginButton:" destination="-1" eventType="touchUpInside" id="LIJ-6L-Pwg"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <constraints>
+                <constraint firstItem="xLB-ow-AXA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="PpM-De-shl"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="QVr-Ty-rBR" secondAttribute="bottom" id="UGW-YY-fgd"/>
+                <constraint firstItem="xLB-ow-AXA" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="XkL-aR-tYP"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xLB-ow-AXA" secondAttribute="trailing" constant="30" id="Y2B-Ja-yFu"/>
+                <constraint firstItem="QVr-Ty-rBR" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="bOM-pq-XNl"/>
+                <constraint firstItem="QVr-Ty-rBR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="hsX-l4-VuC"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="QVr-Ty-rBR" secondAttribute="trailing" id="kl7-jm-fLh"/>
+            </constraints>
+            <point key="canvasLocation" x="194" y="25"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="nen" width="819" height="1024"/>
+    </resources>
+</document>
