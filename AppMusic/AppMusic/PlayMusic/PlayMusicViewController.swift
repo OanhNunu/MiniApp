@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import Alamofire
+import Kingfisher
 
 class PlayMusicViewController: UIViewController {
     
@@ -29,7 +30,7 @@ class PlayMusicViewController: UIViewController {
     var timer: Timer?
     var playingIndex = 0
     
-    var trackList = [AlbumModel]()
+    var trackList = [Item]()
     var tractListID: String?
     
     //MARK: - LifeCycle
@@ -40,6 +41,7 @@ class PlayMusicViewController: UIViewController {
         volumeSlider.minimumValue = 0
         self.setupTableView()
         self.getTrackList()
+        
     }
     
     func setupTableView() {
@@ -48,7 +50,7 @@ class PlayMusicViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
-
+    
     func playerInit() {
         let url = URL(string: "")
         if timer == nil {
@@ -71,41 +73,36 @@ class PlayMusicViewController: UIViewController {
             let currentTimeBySecond = CMTimeGetSeconds(player.currentTime())
             musicSlider.value = Float(currentTimeBySecond)
         }
-        
-//        volumeSlider.value = Float(player?.currentTime())
-//        endLabel.text = getFormattedTime(timeInterval: player?.currentTime())
-//        let remainingTime = player?.currentItem?.duration - player?.currentTime()
-//        endLabel.text = getFormattedTime(timeInterval: remainingTime)
     }
     
     func getTrackList() {
         guard let id = self.tractListID, !id.isEmpty else { return }
-        let url = "https://spotify23.p.rapidapi.com/albums/"
-        let headers: HTTPHeaders = [HTTPHeader(name: "X-RapidAPI-Key", value: "544fa9d5e2msh875bb82680b4fd0p1977ecjsn1b74cd6c2652"),
-                                    HTTPHeader(name: "X-RapidAPI-Host", value:"spotify23.p.rapidapi.com")]
+        let url = API.urlAPIAlbum
+        let headers: HTTPHeaders = [HTTPHeader(name: "X-RapidAPI-Key", value: API.valueKey),
+                                    HTTPHeader(name: "X-RapidAPI-Host", value: API.valueHost)]
         let params: Parameters = ["ids": id]
         AF.request(url, parameters: params, headers: headers).validate()
             .responseDecodable(of: AlbumsResponse.self) { response in
                 guard let album = response.value else { return }
                 print(album)
-                self.trackList = album.albums ?? []
+                self.trackList = album.albums?.first?.tracks?.items ?? []
                 self.tableView.reloadData()
             }
     }
     
-    /*private func getFormattedTime(timeInterval: TimeInterval) -> String {
-        let mins = timeInterval / 60
-        let secs = timeInterval.truncatingRemainder(dividingBy: 60)
-        let timeFormatter = NumberFormatter()
-        timeFormatter.minimumIntegerDigits = 2
-        timeFormatter.minimumFractionDigits = 0
-        timeFormatter.roundingMode = .down
-        
-        guard let minsSting = timeFormatter.string(from: NSNumber(value: mins)), let secString = timeFormatter.string(from: NSNumber(value: secs)) else {
-            return "00:00"
+    func redirectToSpotify(uri: String) {
+        let url = URL(string: uri)!
+        if UIApplication.shared.canOpenURL(url) {
+            // opens spotify app and start playing song
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            // navigate user to app store spotify page if user doesnt have spotify app installed
+            let alert = UIAlertController(title: "Mở AppStore", message: "Cài đặt Spotify để tiếp tục!", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .destructive, handler: nil)
+            alert.addAction(ok)
+            self.present(alert, animated: true)
         }
-        return "\(minsSting):\(secString)"
-    }*/
+    }
     
     //MARK: - Actions
     @IBAction func touchPlayPauseButton(_ sender: UIButton) {
@@ -123,37 +120,10 @@ class PlayMusicViewController: UIViewController {
         
     }
     
-//    func play() {
-//        volumeSlider.value = 0.0
-//        volumeSlider.maximumValue = Float(player?.currentItem?.duration)
-//        player?.play()
-//        touchPlayPauseButton(player.isSelected)
-//    }
-//
-//    func stop() {
-//        player?.pause()
-//        timer?.invalidate()
-//        timer = nil
-//    }
-    
     @IBAction func touchBackwardButton(_ sender: Any) {
-//        playingIndex -= 1
-//        if playingIndex < 0 {
-//            playingIndex = album.songs.count - 1
-//        }
-//        playerInit(song: album.songs[playingIndex])
-//        play()
-//        touchPlayPauseButton(player.isSelected)
     }
     
     @IBAction func touchForwardButton(_ sender: Any) {
-//        playingIndex += 1
-//        if playingIndex > album.songs.count {
-//            playingIndex = 0
-//        }
-//        playerInit(song: album.songs[playingIndex])
-//        play()
-//        touchPlayPauseButton(player.isSelected)
     }
     
     @IBAction func changeVolumeSlider(_ sender: Any) {
@@ -169,6 +139,10 @@ class PlayMusicViewController: UIViewController {
 
 extension PlayMusicViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = self.trackList[indexPath.row]
+        if let uri = model.uri {
+            self.redirectToSpotify(uri: uri)
+        }
         
     }
 }

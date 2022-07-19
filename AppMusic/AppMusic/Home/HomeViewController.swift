@@ -89,9 +89,17 @@ extension HomeViewController: UICollectionViewDataSource {
 //MARK: - UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let uri = self.playList?[indexPath.row].data?.uri, let id = self.getTrackListID(uri) else { return }
-        let vc = PlayMusicViewController()
-        vc.tractListID = id
-        navigationController?.present(vc, animated: true)
+        guard let uri = self.playList?[indexPath.row].data?.uri else { return }
+        let url = URL(string: uri)!
+        if UIApplication.shared.canOpenURL(url) {
+            // opens spotify app and start playing song
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            // navigate user to app store spotify page if user doesnt have spotify app installed
+            let alert = UIAlertController(title: "Mở AppStore", message: "Cài đặt Spotify để tiếp tục!", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .destructive, handler: nil)
+            alert.addAction(ok)
+            self.present(alert, animated: true)
+        }
     }
 }

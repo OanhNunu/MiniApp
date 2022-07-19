@@ -23,7 +23,7 @@ class SongTableViewCell: UITableViewCell {
 
     }
     
-    func setupCell(model: AlbumModel) {
+    func setupCell(model: Item) {
         self.trackLabel.text = model.name
         self.artistLabel.text = model.artists?.first?.name
     }
