@@ -35,7 +35,7 @@ class BaseCollectionView: UIViewController {
         layout.minimumInteritemSpacing = 5
         layout.minimumLineSpacing = 5
         collectionView.collectionViewLayout = layout
-        getAlbumList(query: "hot")
+        getAlbumList(query: "o")
     }
     
     func getAlbumList(query: String) {
