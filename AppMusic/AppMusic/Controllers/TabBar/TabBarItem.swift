@@ -66,7 +66,7 @@ enum TabBarItem {
             let navi = UINavigationController(rootViewController: vc)
             return navi
         case .Music:
-            let vc = MusicViewController()
+            let vc = UIViewController()
             vc.tabBarItem = self.item
             let navi = UINavigationController(rootViewController: vc)
             return navi
