@@ -17,7 +17,7 @@ class HomeCollectionCell: UICollectionViewCell {
     //MARK: - LifeCycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        backgroundColor = .lightText
         musicImageView.layer.cornerRadius = musicImageView.frame.height/9
         musicImageView.clipsToBounds = true
     }

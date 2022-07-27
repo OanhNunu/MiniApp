@@ -15,13 +15,13 @@ enum TabBarItem {
     case ForYou
     
     var allTab: [UIViewController] {
-        return [TabBarItem.Home.viewController, TabBarItem.Album.viewController, TabBarItem.Artist.viewController, TabBarItem.ForYou.viewController]
+        return [TabBarItem.Home.viewController, TabBarItem.Album.viewController, TabBarItem.Artist.viewController, TabBarItem.Music.viewController, TabBarItem.ForYou.viewController]
     }
     
     var title: String {
         switch self {
         case .Home:
-            return "Music"
+            return "Browse"
         case .Album:
             return "Album"
         case .Artist:
@@ -36,7 +36,7 @@ enum TabBarItem {
     var item: UITabBarItem {
         switch self {
         case .Home:
-            return UITabBarItem(title: self.title, image: UIImage(named: "playlist")?.withRenderingMode(.alwaysTemplate), selectedImage: UIImage(named: "playlist")?.withRenderingMode(.alwaysTemplate))
+            return UITabBarItem(title: self.title, image: UIImage(named: "home-off")?.withRenderingMode(.alwaysTemplate), selectedImage: UIImage(named: "home-on")?.withRenderingMode(.alwaysTemplate))
         case .Album:
             return UITabBarItem(title: self.title, image: UIImage(named: "music-library")?.withRenderingMode(.alwaysTemplate), selectedImage: UIImage(named: "music-library")?.withRenderingMode(.alwaysTemplate))
         case .Artist:
@@ -51,7 +51,7 @@ enum TabBarItem {
     var viewController: UIViewController {
         switch self {
         case .Home:
-            let vc = HomeViewController()
+            let vc = BrowseViewController()
             vc.tabBarItem = self.item
             let navi = UINavigationController(rootViewController: vc)
             return navi
@@ -66,7 +66,7 @@ enum TabBarItem {
             let navi = UINavigationController(rootViewController: vc)
             return navi
         case .Music:
-            let vc = UIViewController()
+            let vc = HomeViewController()
             vc.tabBarItem = self.item
             let navi = UINavigationController(rootViewController: vc)
             return navi

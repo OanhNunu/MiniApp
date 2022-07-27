@@ -157,7 +157,6 @@ extension PlayMusicViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SongTableViewCell", for: indexPath) as! SongTableViewCell
         let track = self.trackList[indexPath.row]
         cell.setupCell(model: track)
-        
         return cell
     }
 }

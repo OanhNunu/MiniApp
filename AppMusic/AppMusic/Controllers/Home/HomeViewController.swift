@@ -20,7 +20,7 @@ class HomeViewController: UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Home"
+        self.title = "Music"
         
         ///setup CollectionView
         homeCollectionView.dataSource = self
