@@ -30,20 +30,12 @@ class ForYouViewController: UIViewController {
         self.navigationItem.title = "Account"
         userNameLabel.text = "123456789"
         
-        let rightBarItem = UIBarButtonItem(image: UIImage(named: "logout"), style: .plain, target: self, action: #selector(tapLogout))
-        self.navigationItem.rightBarButtonItem = rightBarItem
-        
         userImageView.layer.cornerRadius = userImageView.frame.width/3
         imageButton.layer.cornerRadius = userImageView.frame.width/3
         
         inforTableView.dataSource = self
         inforTableView.delegate = self
         inforTableView.register(UINib(nibName: "HomeTableCell", bundle: nil), forCellReuseIdentifier: "HomeTableCell")
-    }
-    
-    @objc func tapLogout() {
-        UserDefaults.standard.set(false, forKey: "LOGGED_IN")
-        App.shared.swipeBackToLogin()
     }
     
     //MARK: - Actions

@@ -49,7 +49,7 @@ class BrowseViewController: UIViewController {
     }
     
     @objc func didtapSetting() {
-        let vc = ForYouViewController()
+        let vc = SettingsViewController()
         vc.title = "Settings"
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)

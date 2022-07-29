@@ -16,7 +16,7 @@ final class App {
     var loginViewController = LoginViewController()
     
     func startInterface() {
-        if UserDefaults.standard.bool(forKey: "LOGGED_IN") { ///check whether user logged or not
+        if UserDefaults.standard.bool(forKey: "LOGGED_IN") {
             window.rootViewController = mainNavigationController
         } else {
             window.rootViewController = loginViewController

@@ -19,31 +19,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         App.shared.window = window
         App.shared.startInterface()
-        ///let viewController = TabBarController()
-        ///let navi = UINavigationController(rootViewController: viewController)
-        ///navi.isNavigationBarHidden = true
-        ///window.rootViewController = navi
         
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
-        
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
-        
     }
     
     func sceneWillResignActive(_ scene: UIScene) {
-        
     }
     
     func sceneWillEnterForeground(_ scene: UIScene) {
-        
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
-        
     }
     
 }
