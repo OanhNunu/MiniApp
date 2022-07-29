@@ -23,9 +23,9 @@ class SongTableViewCell: UITableViewCell {
 
     }
     
-    func setupCell(model: Item) {
-        self.trackLabel.text = model.name
-        self.artistLabel.text = model.artists?.first?.name
+    func configureDataCell(model: PlayListItem) {
+        self.trackLabel.text = model.data?.name
+        self.artistLabel.text = model.data?.owner?.name
     }
     
 }

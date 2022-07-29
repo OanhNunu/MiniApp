@@ -25,7 +25,8 @@ class BrowseViewController: UIViewController {
         return spinner
     }()
     
-    var playList: PlayList?
+    var playList: [PlayListItem]?
+    var trendPlayList: [PlayListItem]?
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -38,7 +39,7 @@ class BrowseViewController: UIViewController {
                                                             action: #selector(didtapSetting))
         view.addSubview(spinner)
         configureCollectionView()
-        fetchData(query: "m")
+        fetchData(query: "a")
     }
     
     override func viewDidLayoutSubviews() {
@@ -59,10 +60,10 @@ class BrowseViewController: UIViewController {
         collectionView.register(UICollectionViewCell.self,
                                 forCellWithReuseIdentifier: "cell")
         collectionView.register(NewReleasesCollectionViewCell.self, forCellWithReuseIdentifier: NewReleasesCollectionViewCell.identifier)
-        collectionView.register(UINib(nibName: "HomeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "HomeCollectionCell")
+        collectionView.register(UINib(nibName: "CollectionCell", bundle: nil), forCellWithReuseIdentifier: "CollectionCell")
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = .systemBackground
+        ///collectionView.backgroundColor = .systemBackground
     }
     
     private func fetchData(query: String) {
@@ -78,7 +79,8 @@ class BrowseViewController: UIViewController {
             .responseDecodable(of: SearchAlbumsResponse.self) { response in
                 guard let playlist = response.value else { return }
                 print(playlist)
-                self.playList = playlist.playlists
+                self.playList = playlist.playlists?.items
+                self.trendPlayList = playlist.playlists?.items
                 self.collectionView.reloadData()
             }
     }
@@ -91,32 +93,34 @@ extension BrowseViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewReleasesCollectionViewCell.identifier, for: indexPath) as! NewReleasesCollectionViewCell
-            
-//            if let playlist = playList {
-//                cell.configure(with: playlist)
-//            }
+            cell.backgroundColor = .systemPink
+            if let playlist = playList?[indexPath.row] {
+                cell.configurePlayListsCell(with: playlist)
+            }
             return cell
         } else if indexPath.section == 1 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCollectionCell", for: indexPath) as! HomeCollectionCell
-            
-            if let playList = self.playList?.items?[indexPath.row] {
-                if let url = URL(string: playList.data?.images?.items?.first?.sources?.first?.url ?? "") {
-                    cell.musicImageView.kf.setImage(with: url)
-                }
-                cell.nameMusicLabel.text = playList.data?.name
-                cell.singMusicLabel.text = playList.data?.owner?.name
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as! CollectionCell
+            cell.backgroundColor = .systemBackground
+            if let playlist = trendPlayList?[indexPath.row] {
+                cell.configurePlayListsCell(with: playlist)
             }
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCollectionCell", for: indexPath) as! HomeCollectionCell
-            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewReleasesCollectionViewCell.identifier, for: indexPath) as! NewReleasesCollectionViewCell
+            if let playlist = playList?[indexPath.row] {
+                cell.configurePlayListsCell(with: playlist)
+            }
             cell.backgroundColor = .systemGreen
             return cell
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return playList?.items?.count ?? 0
+        if section == 1 {
+            return trendPlayList?.count ?? 0
+        } else {
+            return playList?.count ?? 0
+        }
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -176,13 +180,13 @@ extension BrowseViewController: UICollectionViewDataSource {
                                                    heightDimension: .fractionalHeight(1.0)))
             item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
             
-            let group = NSCollectionLayoutGroup.horizontal(
+            let horizontalGroup = NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                    heightDimension: .absolute(100)),
                 subitem: item,
                 count: 1)
             
-            let section = NSCollectionLayoutSection(group: group)
+            let section = NSCollectionLayoutSection(group: horizontalGroup)
             return section
             
         default:
@@ -206,5 +210,10 @@ extension BrowseViewController: UICollectionViewDataSource {
 
 //MARK: - UICollectionViewDelegate
 extension BrowseViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            let vc = MusicViewController()
+            navigationController?.present(vc, animated: true)
+        }
+    }
 }

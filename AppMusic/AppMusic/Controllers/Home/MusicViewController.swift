@@ -9,7 +9,7 @@ import UIKit
 import Alamofire
 import Kingfisher
 
-class HomeViewController: UIViewController {
+class MusicViewController: UIViewController {
     
     //MARK: - Outlets
     @IBOutlet weak var homeCollectionView: UICollectionView!
@@ -25,7 +25,7 @@ class HomeViewController: UIViewController {
         ///setup CollectionView
         homeCollectionView.dataSource = self
         homeCollectionView.delegate = self
-        homeCollectionView.register(UINib(nibName: "HomeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "HomeCollectionCell")
+        homeCollectionView.register(UINib(nibName: "CollectionCell", bundle: nil), forCellWithReuseIdentifier: "CollectionCell")
         let screenWidth = UIScreen.main.bounds.width
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
@@ -67,19 +67,19 @@ class HomeViewController: UIViewController {
 }
 
 //MARK: - UICollectionViewDataSource
-extension HomeViewController: UICollectionViewDataSource {
+extension MusicViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return playList?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = homeCollectionView.dequeueReusableCell(withReuseIdentifier: "HomeCollectionCell", for: indexPath) as! HomeCollectionCell
+        let cell = homeCollectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as! CollectionCell
         if let playList = self.playList?[indexPath.item] {
             if let url = URL(string: playList.data?.images?.items?.first?.sources?.first?.url ?? "") {
-                cell.musicImageView.kf.setImage(with: url)
+                cell.imageView.kf.setImage(with: url)
             }
-            cell.nameMusicLabel.text = playList.data?.name
-            cell.singMusicLabel.text = playList.data?.owner?.name
+            cell.nameLabel.text = playList.data?.name
+            cell.artistLabel.text = playList.data?.owner?.name
         }
         return cell
     }
@@ -87,7 +87,7 @@ extension HomeViewController: UICollectionViewDataSource {
 }
 
 //MARK: - UICollectionViewDelegate
-extension HomeViewController: UICollectionViewDelegate {
+extension MusicViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let uri = self.playList?[indexPath.row].data?.uri else { return }
         let url = URL(string: uri)!

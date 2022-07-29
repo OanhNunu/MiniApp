@@ -30,18 +30,16 @@ class PlayMusicViewController: UIViewController {
     var timer: Timer?
     var playingIndex = 0
     
-    var trackList = [Item]()
+    var trackList = [PlayListItem]()
     var tractListID: String?
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Phát nhạc"
-        ///self.playerInit()
         volumeSlider.minimumValue = 0
         self.setupTableView()
         self.getTrackList()
-        
     }
     
     func setupTableView() {
@@ -82,10 +80,9 @@ class PlayMusicViewController: UIViewController {
                                     HTTPHeader(name: "X-RapidAPI-Host", value: API.valueHost)]
         let params: Parameters = ["ids": id]
         AF.request(url, parameters: params, headers: headers).validate()
-            .responseDecodable(of: AlbumsResponse.self) { response in
+            .responseDecodable(of: SearchAlbumsResponse.self) { response in
                 guard let album = response.value else { return }
                 print(album)
-                self.trackList = album.albums?.first?.tracks?.items ?? []
                 self.tableView.reloadData()
             }
     }
@@ -93,10 +90,8 @@ class PlayMusicViewController: UIViewController {
     func redirectToSpotify(uri: String) {
         let url = URL(string: uri)!
         if UIApplication.shared.canOpenURL(url) {
-            // opens spotify app and start playing song
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         } else {
-            // navigate user to app store spotify page if user doesnt have spotify app installed
             let alert = UIAlertController(title: "Mở AppStore", message: "Cài đặt Spotify để tiếp tục!", preferredStyle: .alert)
             let ok = UIAlertAction(title: "OK", style: .destructive, handler: nil)
             alert.addAction(ok)
@@ -135,19 +130,18 @@ class PlayMusicViewController: UIViewController {
     }
 }
 
-
-
+//MARK: - UITableViewDelegate
 extension PlayMusicViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = self.trackList[indexPath.row]
-        if let uri = model.uri {
+        if let uri = model.data?.uri {
             self.redirectToSpotify(uri: uri)
         }
         
     }
 }
 
-
+//MARK: - UITableViewDataSource
 extension PlayMusicViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.trackList.count
@@ -156,7 +150,7 @@ extension PlayMusicViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SongTableViewCell", for: indexPath) as! SongTableViewCell
         let track = self.trackList[indexPath.row]
-        cell.setupCell(model: track)
+        cell.configureDataCell(model: track)
         return cell
     }
 }

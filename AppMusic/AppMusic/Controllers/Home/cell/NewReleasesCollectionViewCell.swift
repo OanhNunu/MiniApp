@@ -92,14 +92,23 @@ class NewReleasesCollectionViewCell: UICollectionViewCell {
         numberOfTracksLabel.text = nil
     }
     
-    func configure(with viewModel: PlayList) {
-        guard let model = viewModel.items?.first?.data else { return }
+    func configure(with viewModel: SearchAlbumsResponse) {
+        guard let model = viewModel.playlists?.items?.first?.data else { return }
         if let url = URL(string: model.images?.items?.first?.sources?.first?.url ?? "") {
             albumCoverImageView.kf.setImage(with: url)
         }
-        albumNameLabel.text = model.name
-        artistNameLabel.text = model.owner?.name
-        numberOfTracksLabel.text = "Tracks: \(String(describing: viewModel.totalCount))"
+        albumNameLabel.text = viewModel.albums?.items?.first?.data?.name
+        artistNameLabel.text = viewModel.artists?.items?.first?.data?.profile?.name
+        numberOfTracksLabel.text = "Tracks: \(String(describing: viewModel.albums?.items?.count)))"
+    }
+    
+    func configurePlayListsCell(with model: PlayListItem) {
+        let list = model.data
+        if let url = URL(string: list?.images?.items?.first?.sources?.first?.url ?? "") {
+            albumCoverImageView.kf.setImage(with: url)
+        }
+        albumNameLabel.text = list?.name
+        artistNameLabel.text = list?.owner?.name
     }
     
 }

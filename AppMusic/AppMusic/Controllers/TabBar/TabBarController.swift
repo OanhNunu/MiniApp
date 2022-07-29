@@ -12,6 +12,6 @@ class TabBarController: UITabBarController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewControllers = [TabBarItem.Home.viewController, TabBarItem.Album.viewController, TabBarItem.Artist.viewController,TabBarItem.Music.viewController, TabBarItem.ForYou.viewController]
+        self.viewControllers = [TabBarItem.Home.viewController, TabBarItem.Album.viewController, TabBarItem.Artist.viewController, TabBarItem.ForYou.viewController]
     }
 }

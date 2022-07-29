@@ -11,11 +11,10 @@ enum TabBarItem {
     case Home
     case Album
     case Artist
-    case Music
     case ForYou
     
     var allTab: [UIViewController] {
-        return [TabBarItem.Home.viewController, TabBarItem.Album.viewController, TabBarItem.Artist.viewController, TabBarItem.Music.viewController, TabBarItem.ForYou.viewController]
+        return [TabBarItem.Home.viewController, TabBarItem.Album.viewController, TabBarItem.Artist.viewController, TabBarItem.ForYou.viewController]
     }
     
     var title: String {
@@ -26,8 +25,6 @@ enum TabBarItem {
             return "Album"
         case .Artist:
             return "Artist"
-        case .Music:
-            return "Music"
         case .ForYou:
             return "For You"
         }
@@ -41,8 +38,6 @@ enum TabBarItem {
             return UITabBarItem(title: self.title, image: UIImage(named: "music-library")?.withRenderingMode(.alwaysTemplate), selectedImage: UIImage(named: "music-library")?.withRenderingMode(.alwaysTemplate))
         case .Artist:
             return UITabBarItem(title: self.title, image: UIImage(named: "micro")?.withRenderingMode(.alwaysTemplate), selectedImage: UIImage(named: "micro")?.withRenderingMode(.alwaysTemplate))
-        case .Music:
-            return UITabBarItem(title: self.title, image: UIImage(named: "playlist")?.withRenderingMode(.alwaysTemplate), selectedImage: UIImage(named: "playlist")?.withRenderingMode(.alwaysTemplate))
         case .ForYou:
             return UITabBarItem(title: self.title, image: UIImage(named: "user")?.withRenderingMode(.alwaysTemplate), selectedImage: UIImage(named: "user")?.withRenderingMode(.alwaysTemplate))
         }
@@ -56,17 +51,12 @@ enum TabBarItem {
             let navi = UINavigationController(rootViewController: vc)
             return navi
         case .Album:
-            let vc = BaseCollectionView()
+            let vc = AlbumsCollectionView()
             vc.tabBarItem = self.item
             let navi = UINavigationController(rootViewController: vc)
             return navi
         case .Artist:
             let vc = ArtistViewController()
-            vc.tabBarItem = self.item
-            let navi = UINavigationController(rootViewController: vc)
-            return navi
-        case .Music:
-            let vc = HomeViewController()
             vc.tabBarItem = self.item
             let navi = UINavigationController(rootViewController: vc)
             return navi

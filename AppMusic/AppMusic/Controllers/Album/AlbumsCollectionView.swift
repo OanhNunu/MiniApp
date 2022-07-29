@@ -9,14 +9,14 @@ import UIKit
 import Alamofire
 import Kingfisher
 
-class BaseCollectionView: UIViewController {
+class AlbumsCollectionView: UIViewController {
     
     //MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var albumSearchBar: UISearchBar!
     
     //MARK: - Variables
-    var album: Albums?
+    var album: [AlbumsItem]?
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -27,7 +27,7 @@ class BaseCollectionView: UIViewController {
         
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(UINib(nibName: "HomeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "HomeCollectionCell")
+        collectionView.register(UINib(nibName: "CollectionCell", bundle: nil), forCellWithReuseIdentifier: "CollectionCell")
         let screenWidth = UIScreen.main.bounds.width
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
@@ -51,7 +51,7 @@ class BaseCollectionView: UIViewController {
             .responseDecodable(of: SearchAlbumsResponse.self) { response in
                 guard let album = response.value else { return }
                 print(album)
-                self.album = album.albums
+                self.album = album.albums?.items
                 self.collectionView.reloadData()
             }
     }
@@ -68,30 +68,26 @@ class BaseCollectionView: UIViewController {
 }
 
 //MARK: - UICollectionViewDataSource
-extension BaseCollectionView: UICollectionViewDataSource {
+extension AlbumsCollectionView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return album?.items?.count ?? 0
+        return album?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCollectionCell", for: indexPath) as! HomeCollectionCell
-        if let album = self.album?.items?[indexPath.row] {
-            if let url = URL(string: album.data?.coverArt?.sources?.first?.url ?? "") {
-                cell.musicImageView.kf.setImage(with: url)
-            }
-            cell.nameMusicLabel.text = album.data?.name
-            cell.singMusicLabel.text = album.data?.artists?.items?.first?.profile?.name
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as! CollectionCell
+        if let album = self.album?[indexPath.row] {
+            cell.configureAlbumsCell(with: album)
         }
         return cell
     }
 }
 
 //MARK: - UICollectionViewDelegate
-extension BaseCollectionView: UICollectionViewDelegate {
+extension AlbumsCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        guard let uri = self.album?.items?[indexPath.row].data?.uri,
+        guard let uri = self.album?[indexPath.row].data?.uri,
               let id = self.getTrackListID(uri) else { return }
         let vc = PlayMusicViewController()
         vc.tractListID = id
@@ -100,7 +96,7 @@ extension BaseCollectionView: UICollectionViewDelegate {
 }
 
 //MARK: - UISearchBarDelegate
-extension BaseCollectionView: UISearchBarDelegate {
+extension AlbumsCollectionView: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let album = searchBar.text else { return }
         getAlbumList(query: album)

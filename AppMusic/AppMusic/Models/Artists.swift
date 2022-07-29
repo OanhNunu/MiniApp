@@ -7,10 +7,6 @@
 
 import Foundation
 
-struct Artists: Codable {
-    let items: [ArtistsItem]?
-}
-
 struct ArtistList: Codable {
     let items: [ArtistData]?
 }

@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeCollectionCell" id="gTV-IL-0wX" customClass="HomeCollectionCell" customModule="AppMusic" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionCell" id="gTV-IL-0wX" customClass="CollectionCell" customModule="AppMusic" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="268" height="279"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -52,9 +52,9 @@
             </constraints>
             <size key="customSize" width="268" height="279"/>
             <connections>
-                <outlet property="musicImageView" destination="6Y0-u6-OG0" id="BaH-cZ-hpe"/>
-                <outlet property="nameMusicLabel" destination="nrD-pT-V79" id="Ifj-70-E1G"/>
-                <outlet property="singMusicLabel" destination="kNG-kh-cHf" id="H8T-zg-IT1"/>
+                <outlet property="artistLabel" destination="kNG-kh-cHf" id="cAX-Pn-BqS"/>
+                <outlet property="imageView" destination="6Y0-u6-OG0" id="el3-Ib-vXr"/>
+                <outlet property="nameLabel" destination="nrD-pT-V79" id="WP1-Nz-njM"/>
             </connections>
             <point key="canvasLocation" x="-149" y="14"/>
         </collectionViewCell>

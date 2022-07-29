@@ -23,7 +23,7 @@ class ArtistViewController: UIViewController {
         self.navigationItem.title = "Nghệ sĩ"
         
         artistCollView.dataSource = self
-        artistCollView.register(UINib(nibName: "HomeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "HomeCollectionCell")
+        artistCollView.register(UINib(nibName: "CollectionCell", bundle: nil), forCellWithReuseIdentifier: "CollectionCell")
         
         let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         let screenWidth = UIScreen.main.bounds.width
@@ -60,15 +60,10 @@ extension ArtistViewController: UICollectionViewDataSource {
         return artist?.count ?? 0
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = artistCollView.dequeueReusableCell(withReuseIdentifier: "HomeCollectionCell", for: indexPath) as! HomeCollectionCell
-        if let artistInfo = self.artist?[indexPath.item] {
-            if let url = URL(string: artistInfo.data?.visuals?.avatarImage?.sources?.first?.url ?? "") {
-                cell.musicImageView.kf.setImage(with: url)
-            }
-            cell.nameMusicLabel.text = artistInfo.data?.profile?.name
-            cell.singMusicLabel.isHidden = true
+        let cell = artistCollView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as! CollectionCell
+        if let artists = self.artist?[indexPath.row] {
+            cell.configureArtistsCell(with: artists)
         }
-        
         return cell
     }
 }
